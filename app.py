@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+import streamlit as st
+
+st.set_page_config(
+    page_title="Project Consilium | JMPetrus",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
+page_html = """
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project Consilium | JMPetrus</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -87,26 +92,6 @@
 
     .btn:hover { background: #e0bb65; }
 
-    .btn-outline {
-      display: inline-block;
-      padding: 14px 36px;
-      background: transparent;
-      color: #c9a84c;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-decoration: none;
-      border-radius: 4px;
-      border: 2px solid #c9a84c;
-      transition: all 0.2s;
-      cursor: pointer;
-    }
-
-    .btn-outline:hover {
-      background: #c9a84c;
-      color: #0f0f0f;
-    }
-
     .section {
       padding: 80px 48px;
       max-width: 1100px;
@@ -119,13 +104,6 @@
       text-transform: uppercase;
       color: #c9a84c;
       margin-bottom: 48px;
-    }
-
-    .section-heading {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 32px;
-      line-height: 1.2;
     }
 
     .section-text {
@@ -159,33 +137,6 @@
       margin-bottom: 0;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: #1a1a1a;
-      border: 1px solid #2a2a2a;
-      border-radius: 8px;
-      padding: 36px;
-      transition: border-color 0.2s;
-    }
-
-    .card:hover { border-color: #c9a84c; }
-
-    .card h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: #888;
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
     .list-section {
       margin-top: 32px;
     }
@@ -210,7 +161,7 @@
     }
 
     .list-section ul li::before {
-      content: "\2022";
+      content: "\\2022";
       color: #c9a84c;
       position: absolute;
       left: 0;
@@ -258,11 +209,6 @@
       padding: 100px 24px;
     }
 
-    .coming-soon h2 {
-      font-size: 36px;
-      margin-bottom: 48px;
-    }
-
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -299,22 +245,6 @@
       margin-top: 12px;
     }
 
-    .cta {
-      text-align: center;
-      padding: 100px 24px;
-    }
-
-    .cta h2 {
-      font-size: 40px;
-      margin-bottom: 16px;
-    }
-
-    .cta p {
-      color: #888;
-      margin-bottom: 36px;
-      font-size: 16px;
-    }
-
     footer {
       text-align: center;
       padding: 32px;
@@ -332,10 +262,8 @@
     @media (max-width: 768px) {
       .hero h1 { font-size: 36px; }
       .section { padding: 60px 24px; }
-      .section-heading { font-size: 28px; }
       .two-col { grid-template-columns: 1fr; }
       header { padding: 16px 24px; flex-direction: column; gap: 12px; }
-      .coming-soon h2 { font-size: 28px; }
     }
   </style>
 </head>
@@ -453,3 +381,6 @@
 
 </body>
 </html>
+"""
+
+st.components.v1.html(page_html, height=4000, scrolling=True)
