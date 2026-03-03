@@ -1,18 +1,25 @@
-<!DOCTYPE html>
+Diff+657-35
+Files Changed2
+import streamlit as st
+ 
+st.set_page_config(
+    page_title="Project Consilium | JMPetrus",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+ 
+page_html = """
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Consilium Lab | JMPetrus Consulting</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #0f0f0f;
       color: #f0f0f0;
     }
-
+ 
     header {
       display: flex;
       justify-content: space-between;
@@ -20,14 +27,14 @@
       padding: 24px 48px;
       border-bottom: 1px solid #222;
     }
-
+ 
     header .brand {
       font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #aaa;
     }
-
+ 
     header nav a {
       color: #aaa;
       text-decoration: none;
@@ -35,14 +42,14 @@
       font-size: 14px;
       transition: color 0.2s;
     }
-
+ 
     header nav a:hover { color: #fff; }
-
+ 
     .hero {
       text-align: center;
       padding: 120px 24px 80px;
     }
-
+ 
     .hero .label {
       font-size: 12px;
       letter-spacing: 3px;
@@ -50,25 +57,26 @@
       color: #c9a84c;
       margin-bottom: 20px;
     }
-
+ 
     .hero h1 {
-      font-size: 64px;
+      font-size: 56px;
       font-weight: 700;
       letter-spacing: -1px;
       line-height: 1.1;
       margin-bottom: 24px;
     }
-
+ 
     .hero h1 span { color: #c9a84c; }
-
-    .hero p {
-      font-size: 18px;
+ 
+    .hero .tagline {
+      font-size: 20px;
       color: #999;
       max-width: 560px;
       margin: 0 auto 40px;
       line-height: 1.7;
+      font-style: italic;
     }
-
+ 
     .btn {
       display: inline-block;
       padding: 14px 36px;
@@ -80,16 +88,18 @@
       text-decoration: none;
       border-radius: 4px;
       transition: background 0.2s;
+      border: none;
+      cursor: pointer;
     }
-
+ 
     .btn:hover { background: #e0bb65; }
-
+ 
     .section {
       padding: 80px 48px;
       max-width: 1100px;
       margin: 0 auto;
     }
-
+ 
     .section-title {
       font-size: 11px;
       letter-spacing: 3px;
@@ -97,56 +107,146 @@
       color: #c9a84c;
       margin-bottom: 48px;
     }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+ 
+    .section-text {
+      color: #999;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 720px;
+      margin-bottom: 24px;
     }
-
-    .card {
+ 
+    .section-text strong {
+      color: #f0f0f0;
+    }
+ 
+    .highlight-box {
+      border-left: 3px solid #c9a84c;
+      padding: 24px 32px;
+      margin: 32px 0;
       background: #1a1a1a;
-      border: 1px solid #2a2a2a;
-      border-radius: 8px;
-      padding: 36px;
-      transition: border-color 0.2s;
+      border-radius: 0 8px 8px 0;
     }
-
-    .card:hover { border-color: #c9a84c; }
-
-    .card h3 {
-      font-size: 20px;
+ 
+    .highlight-box p {
+      color: #ccc;
+      font-size: 16px;
+      line-height: 1.8;
       margin-bottom: 12px;
     }
-
-    .card p {
-      color: #888;
-      font-size: 15px;
-      line-height: 1.7;
+ 
+    .highlight-box p:last-child {
+      margin-bottom: 0;
     }
-
+ 
+    .list-section {
+      margin-top: 32px;
+    }
+ 
+    .list-section h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #f0f0f0;
+    }
+ 
+    .list-section ul {
+      list-style: none;
+      padding: 0;
+    }
+ 
+    .list-section ul li {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.8;
+      padding-left: 20px;
+      position: relative;
+    }
+ 
+    .list-section ul li::before {
+      content: "\\2022";
+      color: #c9a84c;
+      position: absolute;
+      left: 0;
+    }
+ 
     .divider {
       border: none;
       border-top: 1px solid #222;
       margin: 0 48px;
     }
-
-    .cta {
+ 
+    .author-block {
+      text-align: center;
+      padding: 32px;
+      margin-top: 16px;
+    }
+ 
+    .author-block .name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+ 
+    .author-block .role {
+      color: #999;
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+ 
+    .author-block a {
+      color: #c9a84c;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+ 
+    .author-block a:hover {
+      color: #e0bb65;
+    }
+ 
+    .coming-soon {
       text-align: center;
       padding: 100px 24px;
     }
-
-    .cta h2 {
-      font-size: 40px;
-      margin-bottom: 16px;
+ 
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 700px;
+      margin: 0 auto 48px;
     }
-
-    .cta p {
-      color: #888;
-      margin-bottom: 36px;
-      font-size: 16px;
+ 
+    .product-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color 0.2s;
     }
-
+ 
+    .product-card:hover { border-color: #c9a84c; }
+ 
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+ 
+    .product-card .badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c9a84c;
+      border: 1px solid #c9a84c;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+ 
     footer {
       text-align: center;
       padding: 32px;
@@ -154,28 +254,412 @@
       color: #555;
       font-size: 13px;
     }
+ 
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+ 
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 36px; }
+      .section { padding: 60px 24px; }
+      .two-col { grid-template-columns: 1fr; }
+      header { padding: 16px 24px; flex-direction: column; gap: 12px; }
+    }
   </style>
 </head>
 <body>
-
+ 
+  <header>
+    <div class="brand">Project Consilium</div>
+    <nav>
+      <a href="#start">Start Here</a>
+      <a href="#what">What Is It</a>
+      <a href="#tools">Tools</a>
+      <a href="#products">Products</a>
+    </nav>
+  </header>
+ 
+  <section class="hero">
+    <div class="label">Project Consilium</div>
+    <h1>Project <span>Consilium</span></h1>
+    <p class="tagline">Structured decision tools for complex environments.</p>
+    <a href="#start" class="btn">Start Here</a>
+  </section>
+ 
+  <hr class="divider"/>
+ 
+  <section class="section" id="start">
+    <div class="section-title">Start Here</div>
+    <p class="section-text">
+      Project Consilium is the product ecosystem of <strong>JMPetrus</strong> — an evolving suite of practical tools designed to help leaders make sound decisions, strengthen organizational governance and accelerate impact in complex, risk-exposed environments.
+    </p>
+    <p class="section-text">
+      Each tool encodes structured judgment into usable and defensible formats — diagnostics, frameworks, impact measurement, briefs, and decision supports.
+    </p>
+    <div class="highlight-box">
+      <p>Built for leaders who need decisions to hold up under scrutiny.</p>
+      <p>Built for teams that cannot afford reversible thinking.</p>
+    </div>
+ 
+    <div class="author-block">
+      <div class="name">Joelle Petrus</div>
+      <div class="role">Decision Advocate for risk-exposed teams.</div>
+      <a href="https://jmpetrus.com" target="_blank">Jmpetrus.com</a>
+    </div>
+  </section>
+ 
+  <hr class="divider"/>
+ 
+  <section class="section" id="what">
+    <div class="section-title">What is Project Consilium?</div>
+    <p class="section-text">
+      <em>"Consilium"</em> is Latin for counsel or deliberate judgment.
+    </p>
+    <p class="section-text">The premise is simple:</p>
+    <div class="highlight-box">
+      <p>Good decisions rarely fail because of intelligence.</p>
+      <p>They fail because of misaligned incentives, hidden risks, or incomplete framing.</p>
+    </div>
+    <p class="section-text">
+      Project Consilium exists to surface those blind spots before they compound. It reflects an ongoing effort to encode structured judgment into tools that are portable, scalable, and decision-focused. It will evolve as the risk landscape evolves, and client need evolves.
+    </p>
+  </section>
+ 
+  <hr class="divider"/>
+ 
+  <section class="section" id="tools">
+    <div class="section-title">What You'll Find Here</div>
+ 
+    <div class="two-col">
+      <div class="list-section">
+        <h3>Tools designed for:</h3>
+        <ul>
+          <li>ESG and sustainability leaders navigating regulatory pressure</li>
+          <li>Governance teams facing ambiguity</li>
+          <li>Organizations managing reputation or operational exposure</li>
+          <li>Cross-functional teams making irreversible commitments</li>
+        </ul>
+      </div>
+ 
+      <div class="list-section">
+        <h3>Formats may include:</h3>
+        <ul>
+          <li>Readiness diagnostics</li>
+          <li>Risk mapping tools</li>
+          <li>Decision briefs</li>
+          <li>Governance checklists</li>
+          <li>AI-enabled impact frameworks</li>
+        </ul>
+      </div>
+    </div>
+ 
+    <p class="section-text" style="margin-top: 40px;">
+      Each artifact is built to be clear, practical, usable without direct consulting engagement.
+    </p>
+  </section>
+ 
+  <hr class="divider"/>
+ 
+  <section class="coming-soon" id="products">
+    <div class="section-title">Products Coming Soon</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <h3>Sustainability Supplier Readiness</h3>
+        <div class="badge">Coming Soon</div>
+      </div>
+      <div class="product-card">
+        <h3>Proposal Go / No go Tool</h3>
+        <div class="badge">Coming Soon</div>
+      </div>
+    </div>
+    <a href="#" class="btn">Join the Waitlist</a>
+  </section>
+ 
+  <footer>
+    &copy; 2026 JMPetrus. All rights reserved.
+  </footer>
+ 
+</body>
+</html>
+"""
+ 
+st.components.v1.html(page_html, height=4000, scrolling=True)
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consilium Lab | JMPetrus Consulting</title>
+  <title>Project Consilium | JMPetrus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+    }
+ 
+    .hero h1 {
+      font-size: 64px;
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+ 
+    .hero h1 span { color: #c9a84c; }
+ 
+    .hero p {
+      font-size: 18px;
+    .hero .tagline {
+      font-size: 20px;
+      color: #999;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      font-style: italic;
+    }
+ 
+    .btn {
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+ 
+    .btn:hover { background: #e0bb65; }
+ 
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 36px;
+      background: transparent;
+      color: #c9a84c;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px solid #c9a84c;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+ 
+    .btn-outline:hover {
+      background: #c9a84c;
+      color: #0f0f0f;
+    }
+ 
+    .section {
+      padding: 80px 48px;
+      max-width: 1100px;
+      margin-bottom: 48px;
+    }
+ 
+    .section-heading {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      line-height: 1.2;
+    }
+ 
+    .section-text {
+      color: #999;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+ 
+    .section-text strong {
+      color: #f0f0f0;
+    }
+ 
+    .highlight-box {
+      border-left: 3px solid #c9a84c;
+      padding: 24px 32px;
+      margin: 32px 0;
+      background: #1a1a1a;
+      border-radius: 0 8px 8px 0;
+    }
+ 
+    .highlight-box p {
+      color: #ccc;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+ 
+    .highlight-box p:last-child {
+      margin-bottom: 0;
+    }
+ 
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      line-height: 1.7;
+    }
+ 
+    .list-section {
+      margin-top: 32px;
+    }
+ 
+    .list-section h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #f0f0f0;
+    }
+ 
+    .list-section ul {
+      list-style: none;
+      padding: 0;
+    }
+ 
+    .list-section ul li {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.8;
+      padding-left: 20px;
+      position: relative;
+    }
+ 
+    .list-section ul li::before {
+      content: "\2022";
+      color: #c9a84c;
+      position: absolute;
+      left: 0;
+    }
+ 
+    .divider {
+      border: none;
+      border-top: 1px solid #222;
+      margin: 0 48px;
+    }
+ 
+    .author-block {
+      text-align: center;
+      padding: 32px;
+      margin-top: 16px;
+    }
+ 
+    .author-block .name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+ 
+    .author-block .role {
+      color: #999;
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+ 
+    .author-block a {
+      color: #c9a84c;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: color 0.2s;
+    }
+ 
+    .author-block a:hover {
+      color: #e0bb65;
+    }
+ 
+    .coming-soon {
+      text-align: center;
+      padding: 100px 24px;
+    }
+ 
+    .coming-soon h2 {
+      font-size: 36px;
+      margin-bottom: 48px;
+    }
+ 
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 700px;
+      margin: 0 auto 48px;
+    }
+ 
+    .product-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+ 
+    .product-card:hover { border-color: #c9a84c; }
+ 
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+ 
+    .product-card .badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c9a84c;
+      border: 1px solid #c9a84c;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+ 
+    .cta {
+      text-align: center;
+      padding: 100px 24px;
+      color: #555;
+      font-size: 13px;
+    }
+ 
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+ 
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 36px; }
+      .section { padding: 60px 24px; }
+      .section-heading { font-size: 28px; }
+      .two-col { grid-template-columns: 1fr; }
+      header { padding: 16px 24px; flex-direction: column; gap: 12px; }
+      .coming-soon h2 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+ 
   <header>
     <div class="brand">JMPetrus Consulting</div>
+    <div class="brand">Project Consilium</div>
     <nav>
+      <a href="#start">Start Here</a>
+      <a href="#what">What Is It</a>
       <a href="#tools">Tools</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#products">Products</a>
     </nav>
   </header>
-
+ 
   <section class="hero">
     <div class="label">Consilium Lab</div>
     <h1>Diagnostics <span>Built</span><br/>for Impact</h1>
     <p>A curated digital store of consulting diagnostics, frameworks, and tools — designed to help organizations make faster, smarter decisions.</p>
     <a href="#tools" class="btn">Browse the Store</a>
+    <div class="label">Project Consilium</div>
+    <h1>Project <span>Consilium</span></h1>
+    <p class="tagline">Structured decision tools for complex environments.</p>
+    <a href="#start" class="btn">Start Here</a>
   </section>
-
+ 
   <hr class="divider"/>
-
+ 
   <section class="section" id="tools">
     <div class="section-title">What We Offer</div>
     <div class="cards">
@@ -191,29 +675,104 @@
         <h3>Digital Tools & Templates</h3>
         <p>Downloadable tools built by consultants, for consultants — and for the leaders they serve.</p>
       </div>
+  <section class="section" id="start">
+    <div class="section-title">Start Here</div>
+    <p class="section-text">
+      Project Consilium is the product ecosystem of <strong>JMPetrus</strong> — an evolving suite of practical tools designed to help leaders make sound decisions, strengthen organizational governance and accelerate impact in complex, risk-exposed environments.
+    </p>
+    <p class="section-text">
+      Each tool encodes structured judgment into usable and defensible formats — diagnostics, frameworks, impact measurement, briefs, and decision supports.
+    </p>
+    <div class="highlight-box">
+      <p>Built for leaders who need decisions to hold up under scrutiny.</p>
+      <p>Built for teams that cannot afford reversible thinking.</p>
+    </div>
+ 
+    <div class="author-block">
+      <div class="name">Joelle Petrus</div>
+      <div class="role">Decision Advocate for risk-exposed teams.</div>
+      <a href="https://jmpetrus.com" target="_blank">Jmpetrus.com</a>
     </div>
   </section>
-
+ 
   <hr class="divider"/>
-
+ 
   <section class="section" id="about">
     <div class="section-title">About</div>
     <p style="max-width:640px; color:#999; font-size:16px; line-height:1.8;">
       Consilium Lab is an initiative by <strong style="color:#f0f0f0;">JMPetrus Consulting</strong> — a consulting practice focused on equipping organizations with practical tools for clarity, alignment, and growth. We believe great diagnostics are the foundation of great strategy.
+  <section class="section" id="what">
+    <div class="section-title">What is Project Consilium?</div>
+    <p class="section-text">
+      <em>"Consilium"</em> is Latin for counsel or deliberate judgment.
+    </p>
+    <p class="section-text">The premise is simple:</p>
+    <div class="highlight-box">
+      <p>Good decisions rarely fail because of intelligence.</p>
+      <p>They fail because of misaligned incentives, hidden risks, or incomplete framing.</p>
+    </div>
+    <p class="section-text">
+      Project Consilium exists to surface those blind spots before they compound. It reflects an ongoing effort to encode structured judgment into tools that are portable, scalable, and decision-focused. It will evolve as the risk landscape evolves, and client need evolves.
     </p>
   </section>
-
+ 
   <hr class="divider"/>
-
+ 
+  <section class="section" id="tools">
+    <div class="section-title">What You'll Find Here</div>
+ 
+    <div class="two-col">
+      <div class="list-section">
+        <h3>Tools designed for:</h3>
+        <ul>
+          <li>ESG and sustainability leaders navigating regulatory pressure</li>
+          <li>Governance teams facing ambiguity</li>
+          <li>Organizations managing reputation or operational exposure</li>
+          <li>Cross-functional teams making irreversible commitments</li>
+        </ul>
+      </div>
+ 
+      <div class="list-section">
+        <h3>Formats may include:</h3>
+        <ul>
+          <li>Readiness diagnostics</li>
+          <li>Risk mapping tools</li>
+          <li>Decision briefs</li>
+          <li>Governance checklists</li>
+          <li>AI-enabled impact frameworks</li>
+        </ul>
+      </div>
+    </div>
+ 
+    <p class="section-text" style="margin-top: 40px;">
+      Each artifact is built to be clear, practical, usable without direct consulting engagement.
+    </p>
+  </section>
+ 
+  <hr class="divider"/>
+ 
   <section class="cta" id="contact">
     <h2>Ready to get started?</h2>
     <p>Explore the store or reach out to learn how we can help.</p>
     <a href="mailto:hello@jmpetrus.com" class="btn">Get in Touch</a>
+  <section class="coming-soon" id="products">
+    <div class="section-title">Products Coming Soon</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <h3>Sustainability Supplier Readiness</h3>
+        <div class="badge">Coming Soon</div>
+      </div>
+      <div class="product-card">
+        <h3>Proposal Go / No go Tool</h3>
+        <div class="badge">Coming Soon</div>
+      </div>
+    </div>
+    <a href="#" class="btn">Join the Waitlist</a>
   </section>
-
+ 
   <footer>
     &copy; 2026 JMPetrus Consulting. All rights reserved.
+    &copy; 2026 JMPetrus. All rights reserved.
   </footer>
-
+ 
 </body>
-</html>
